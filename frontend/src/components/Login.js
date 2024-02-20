@@ -35,10 +35,8 @@ const Login = () => {
              });
              const { accessToken, refreshToken } = response.data;
 
-      // Set the tokens as cookies
-      Cookies.set('accessToken', accessToken); // Expires in 1 day
-      Cookies.set('refreshToken', refreshToken); // Expires in 7 days
-
+    
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
             console.log(response.data);
             navigate("/browse") // Handle successful login
           } catch (error) {
@@ -58,8 +56,6 @@ const Login = () => {
              console.log(refreshToken);
              
              axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-       
-      
              navigate("/browse")
          // Handle successful login
           } catch (error) {
